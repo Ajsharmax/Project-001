@@ -7,3 +7,7 @@ playwright-report/
 public/vendor/
 
 !.env.example
+
+.wrangler/
+.dev.vars
+.env
