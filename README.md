@@ -1,6 +1,8 @@
-# Project001
+# Markettech / Project001
 
-An independent, privacy-focused technology and productivity website. Responsive homepage, searchable Applications hub, and 12 local PDF utilities. No backend, accounts, document uploads, analytics, or fixed domain.
+Free browser-based PDF tools with a Markettech storefront, optional manual-renewal memberships, and an owner admin panel. Target domain: https://soft.markettech.in. PDF documents stay local; commerce records are stored in Cloudflare D1. Products and paid plans start empty, and checkout starts disabled.
+
+See [Cloudflare deployment and admin setup](docs/cloudflare-deployment.md) for database, owner sign-in, YouPI-PG integration and launch requirements. The verification results below are historical PDF-tool checks, not confirmation that the new payment gateway is live.
 
 ## Develop
 
@@ -55,9 +57,9 @@ At most 20 files / 50 MB total. Basic page operations accept up to 200 pages per
 
 ## Domain and hosting
 
-Copy `.env.example` to `.env.local` and set `VITE_SITE_URL` only when a domain is chosen. It adds an origin canonical URL; no provider or domain is hard-coded. Hash navigation works on ordinary static hosts without route rewrites. Build output is `dist/`. No production deployment has been performed.
+The production configuration sets `VITE_SITE_URL=https://soft.markettech.in`. Copy `.env.example` to `.env.local` for local overrides. Hash navigation works on ordinary static hosts. Build output is `dist/`, including the commerce API Worker. Check Cloudflare for live deployment status.
 
-Use HTTPS in production. Configure the static host with the CSP in `vite.config.ts`, plus `X-Content-Type-Options: nosniff` and `Referrer-Policy: no-referrer`. Vite headers apply only to development/preview, not automatically to your hosting provider. Permit same-origin WebAssembly, workers, blob downloads and images. Do not enable cross-origin document upload endpoints or add analytics without updating the privacy notice.
+Use HTTPS in production. `public/_headers` supplies Cloudflare Pages production security headers. Vite headers apply only to development/preview. Permit same-origin WebAssembly, workers, blob downloads and product images. The privacy notice distinguishes local PDF processing from server-side commerce records.
 
 The image-size dependency override selects its patched 2.0.3 release; verify compatibility and audit when updating PptxGenJS. Packages and versions are pinned reproducibly in `package-lock.json`.
 
